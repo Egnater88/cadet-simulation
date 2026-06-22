@@ -6,9 +6,10 @@ const SYSTEM_PROMPT = `You are a military training scenario engine for 2nd year 
 STRICT RULES:
 - Use simple English (B1 level). Short sentences. Clear words.
 - Every response MUST end with exactly 3 numbered options UNLESS it is the final debrief.
-- Count the student's decisions carefully. After their 3rd decision, output the DEBRIEF immediately.
+- Count the student's decisions carefully. After their 5th decision, output the DEBRIEF immediately.
 - Keep scenario updates to 3-5 sentences.
 - Escalate the situation based on what the student chose.
+- Pace the scenario across 5 decisions: build complications gradually so the situation stays engaging and does not resolve too early. Each decision should open a new problem, not repeat the last one.
 - Keep complications realistic and operational: weather, terrain, vehicle faults, fuel, time pressure, personnel health, supply problems, communication loss. Do NOT introduce protests, civil unrest, politics, or named real-world places or groups.
 - Military tone, direct, not aggressive.
 
@@ -20,7 +21,7 @@ Your options:
 2. [Option B]
 3. [Option C]
 
-FINAL RESPONSE after the student's 3rd decision — use this format exactly:
+FINAL RESPONSE after the student's 5th decision — use this format exactly:
 DEBRIEF:
 • [What the cadet did well]
 • [Something to improve]
@@ -41,6 +42,8 @@ const OPENING_CHOICES = [
   "Take the desert track — clear but slow and very hot.",
   "Wait 1 hour to get more information before deciding.",
 ];
+
+const TOTAL_DECISIONS = 5;
 
 export default function App() {
   const [phase, setPhase] = useState("intro");
@@ -86,9 +89,9 @@ export default function App() {
     const thisDecision = decisionCount + 1;
     setDecisionCount(thisDecision);
 
-    const isLast = thisDecision >= 3;
+    const isLast = thisDecision >= TOTAL_DECISIONS;
     const userContent = isLast
-      ? `My 3rd and final decision: Option ${idx + 1} — ${choice}. Now give me the DEBRIEF.`
+      ? `My ${TOTAL_DECISIONS}th and final decision: Option ${idx + 1} — ${choice}. Now give me the DEBRIEF.`
       : `Decision ${thisDecision}: Option ${idx + 1} — ${choice}`;
 
     const newHistory = [...history, { role: "user", content: userContent }];
@@ -159,7 +162,7 @@ export default function App() {
     setErrorMsg("");
   }
 
-  const pct = Math.round((decisionCount / 3) * 100);
+  const pct = Math.round((decisionCount / TOTAL_DECISIONS) * 100);
 
   const G = {
     green: "#4caf50",
@@ -181,7 +184,7 @@ export default function App() {
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: phase === "debrief" ? G.orange : G.green, boxShadow: `0 0 8px ${phase === "debrief" ? G.orange : G.green}` }} />
           <span style={{ fontSize: 12, letterSpacing: 2, color: G.green, fontWeight: "bold" }}>SDR TRAINING — RABDAN ACADEMY</span>
         </div>
-        <span style={{ fontSize: 11, color: G.dim, letterSpacing: 1 }}>DECISION {decisionCount} / 3</span>
+        <span style={{ fontSize: 11, color: G.dim, letterSpacing: 1 }}>DECISION {decisionCount} / {TOTAL_DECISIONS}</span>
       </div>
 
       <div style={{ maxWidth: 700, margin: "0 auto", padding: "24px 16px 100px" }}>
@@ -194,7 +197,7 @@ export default function App() {
             <div style={{ fontSize: 12, color: G.dim, letterSpacing: 2, marginBottom: 40 }}>CADET LEVEL II · ~20 MINUTES</div>
             <div style={{ background: G.card, border: `1px solid ${G.border}`, borderRadius: 6, padding: 24, marginBottom: 32, textAlign: "left" }}>
               <div style={{ fontSize: 11, color: G.green, letterSpacing: 2, marginBottom: 14 }}>BRIEFING</div>
-              {["You will face a realistic military training simulation.", "You must make 3 decisions under pressure. Each one changes the situation.", "There are no perfect answers — only trade-offs.", "After 3 decisions you receive a personal After Action Review."].map((t, i) => (
+              {["You will face a realistic military training simulation.", "You must make 5 decisions under pressure. Each one changes the situation.", "There are no perfect answers — only trade-offs.", "After 5 decisions you receive a personal After Action Review."].map((t, i) => (
                 <p key={i} style={{ fontSize: 14, lineHeight: 1.8, color: "#aabcaa", margin: "0 0 8px" }}>{t}</p>
               ))}
             </div>
