@@ -201,7 +201,11 @@ export default function App() {
                 <p key={i} style={{ fontSize: 14, lineHeight: 1.8, color: "#aabcaa", margin: "0 0 8px" }}>{t}</p>
               ))}
             </div>
-            <div style={{ fontSize: 11, color: G.dim, letterSpacing: 1, marginBottom: 32 }}>Developed by Francesco Cangiano · Rabdan Academy</div>
+            <div style={{ background: "#132a13", border: `2px solid ${G.green}`, borderRadius: 6, padding: "16px 20px", marginBottom: 32 }}>
+              <div style={{ fontSize: 10, color: G.dim, letterSpacing: 3, marginBottom: 6 }}>DEVELOPED BY</div>
+              <div style={{ fontSize: 22, fontWeight: "bold", color: G.green, letterSpacing: 1 }}>Francesco Cangiano</div>
+              <div style={{ fontSize: 12, color: "#aabcaa", letterSpacing: 1, marginTop: 4 }}>Rabdan Academy</div>
+            </div>
             <button onClick={start}
               style={{ background: "#1a3a1a", border: `2px solid ${G.green}`, color: G.green, padding: "16px 52px", fontSize: 14, letterSpacing: 2, cursor: "pointer", borderRadius: 4, fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
               onMouseOver={(e) => { e.target.style.background = G.green; e.target.style.color = "#0a0f0a"; }}
