@@ -192,15 +192,16 @@ export default function App() {
         {/* INTRO */}
         {phase === "intro" && (
           <div style={{ textAlign: "center", paddingTop: 60 }}>
-            <div style={{ fontSize: 11, letterSpacing: 4, color: G.green, marginBottom: 12 }}>SIMULATE — DELIBERATE — REFLECT</div>
+            <div style={{ fontSize: 11, letterSpacing: 4, color: G.green, marginBottom: 12 }}>EXPERIENCE — DECIDE — REFLECT</div>
             <div style={{ fontSize: 30, fontWeight: "bold", color: "#e8f5e8", marginBottom: 6 }}>OPERATION FALCON</div>
-            <div style={{ fontSize: 12, color: G.dim, letterSpacing: 2, marginBottom: 40 }}>CADET LEVEL II · ~20 MINUTES</div>
-            <div style={{ background: G.card, border: `1px solid ${G.border}`, borderRadius: 6, padding: 24, marginBottom: 32, textAlign: "left" }}>
+            <div style={{ fontSize: 12, color: G.dim, letterSpacing: 2, marginBottom: 40 }}>CADET LEVEL II</div>
+            <div style={{ background: G.card, border: `1px solid ${G.border}`, borderRadius: 6, padding: 24, marginBottom: 20, textAlign: "left" }}>
               <div style={{ fontSize: 11, color: G.green, letterSpacing: 2, marginBottom: 14 }}>BRIEFING</div>
               {["You will face a realistic military training simulation.", "You must make 5 decisions under pressure. Each one changes the situation.", "There are no perfect answers — only trade-offs.", "After 5 decisions you receive a personal After Action Review."].map((t, i) => (
                 <p key={i} style={{ fontSize: 14, lineHeight: 1.8, color: "#aabcaa", margin: "0 0 8px" }}>{t}</p>
               ))}
             </div>
+            <div style={{ fontSize: 11, color: G.dim, letterSpacing: 1, marginBottom: 32 }}>Developed by Francesco Cangiano · Rabdan Academy</div>
             <button onClick={start}
               style={{ background: "#1a3a1a", border: `2px solid ${G.green}`, color: G.green, padding: "16px 52px", fontSize: 14, letterSpacing: 2, cursor: "pointer", borderRadius: 4, fontFamily: "Arial, sans-serif", fontWeight: "bold" }}
               onMouseOver={(e) => { e.target.style.background = G.green; e.target.style.color = "#0a0f0a"; }}
